@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FeatureAComponent } from './feature-a.component';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -9,7 +10,13 @@ import { FeatureAComponent } from './feature-a.component';
     FeatureAComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule.forChild([
+      {
+        path: '',
+        component: FeatureAComponent
+      }
+    ])
   ],
   exports: [
     FeatureAComponent
