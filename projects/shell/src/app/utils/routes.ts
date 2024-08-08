@@ -1,6 +1,6 @@
-import { Routes } from "@angular/router";
+import { Router, Routes } from "@angular/router";
 import { CustomManifest } from "./config";
-import { loadRemoteModule } from "@angular-architects/module-federation";
+import { getManifest, loadRemoteModule } from "@angular-architects/module-federation";
 import { routes } from "../app-routing.module";
 
 export function buildRoutes(options: CustomManifest): Routes {
@@ -18,4 +18,14 @@ export function buildRoutes(options: CustomManifest): Routes {
     });
 
     return [...routes, ...lazyRoutes];
+}
+
+export function initializeDynamicAppRouting(router: Router): () => Promise<void> {
+    return () =>
+        new Promise(resolve => {
+            const manifest = getManifest<CustomManifest>();
+            const routes = buildRoutes(manifest);
+            router.resetConfig(routes);
+            resolve();
+        })
 }

@@ -9,10 +9,10 @@ import { buildRoutes } from './utils/routes';
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent implements OnInit {
+export class AppComponent /*implements OnInit*/ {
   title = 'shell';
 
-  constructor(
+  /*constructor(
     private router: Router
   ) {}
 
@@ -21,5 +21,5 @@ export class AppComponent implements OnInit {
 
     const routes = buildRoutes(manifest);
     this.router.resetConfig(routes);
-  }
+  }*/
 }

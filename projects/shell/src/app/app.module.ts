@@ -1,8 +1,10 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { initializeDynamicAppRouting } from './utils/routes';
+import { Router } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -12,7 +14,14 @@ import { AppComponent } from './app.component';
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initializeDynamicAppRouting,
+      multi: true,
+      deps: [Router]
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
